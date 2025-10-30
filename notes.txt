@@ -1,0 +1,11 @@
+you also need to submit the Group Accountability Measures, as the first
+page of your .pdf file (cover page), please refer to the relevant e-mail I
+sent to the course mailing list.
+
+the report should include the code, documentation, detailed explanations
+of the approach taken, testing instances and their solutions, timings for
+finding the solutions
+
+The A2 live demos will be conducted on-line, throughout the entire day, on
+Tuesday November 4th. I will send an e-mail regarding how to reserve your
+30-minute spot, first-come first-served.
