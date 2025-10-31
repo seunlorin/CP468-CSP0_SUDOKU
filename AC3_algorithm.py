@@ -57,6 +57,33 @@ def AC3(domains, neighbours):
 
     return domains, length_queue # Return the domain and queue length
 
+def is_complete(domains):
+    return all(len(v) == 1 for v in domains.values())
+
+def select_unassigned_variable(domains):
+    # minimum remaining values
+    return min((s for s in domains if len(domains[s]) > 1), key=lambda s: len(domains[s]))
+
+def backtrack(domains, neighbours):
+    if is_complete(domains):
+        return domains
+    var = select_unassigned_variable(domains)
+    for value in sorted(domains[var]):
+        temp = {v: set(domains[v]) for v in domains}  # deep copy domains
+        temp[var] = {value}
+        consistent = True
+        # forward checking
+        for n in neighbours[var]:
+            if value in temp[n]:
+                temp[n].remove(value)
+                if not temp[n]:
+                    consistent = False
+                    break
+        if consistent:
+            result = backtrack(temp, neighbours)
+            if result:
+                return result
+    return None
 
 def main():
 
