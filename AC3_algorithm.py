@@ -1,4 +1,5 @@
 from collections import deque
+from unittest import result
 
 rows = "ABCDEFGHI"
 cols = "123456789"
@@ -39,6 +40,8 @@ def AC3(domains, neighbours):
     queue = deque((xi, xj) for xi in domains for xj in neighbours[xi]) # Make queue with all arcs for every variable and neighbours
     length_queue = [] # Track queue length
 
+    print(f"Initial queue length: {len(queue)}")
+
     # Loop through queue until empty
     while queue:
         length_queue.append(len(queue)) # Update queue length before each pop
@@ -54,6 +57,8 @@ def AC3(domains, neighbours):
             for xk in neighbours[xi]:
                 if xk != xj: # Don't add the same arc back right away
                     queue.append((xk, xi))
+        print(f"Current queue length: {len(queue)}")
+    print(f"Lengths of queue: {length_queue}")
 
     return domains, length_queue # Return the domain and queue length
 
@@ -117,7 +122,19 @@ def main():
     length_queue = 0
 
     domains, length_queue = AC3(domains, neighbors)
+    if is_complete(domains):
+        print("\nThe puzzle is solved by AC-3...")
+        print_sudoku(domains)
+    else:
+        print("\nAC-3 could not solve the puzzle, proceeding to backtracking...")
+        result = backtrack(domains, neighbors)
+        if result:
+            print("\nThe puzzle is solved by Backtracking...")
+            print_sudoku(result)
+        else:
+            print("No solution found.")
 
+def print_sudoku(domains):
     for r in rows:
         row_str = ""
         for c in cols:
@@ -125,7 +142,5 @@ def main():
             value = next(iter(domains[square])) #print domains of each square (assuming that it is comepleted each should have 1 value)
             row_str += f"[{value}]" #format for sudoku puzzle ex. [0] [1] [2]
         print(row_str)
-
-
 if __name__ == '__main__':
     main()

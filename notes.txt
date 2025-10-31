@@ -9,3 +9,12 @@ finding the solutions
 The A2 live demos will be conducted on-line, throughout the entire day, on
 Tuesday November 4th. I will send an e-mail regarding how to reserve your
 30-minute spot, first-come first-served.
+
+
+Your code should keep track and report the length of the queue at each step of the AC-3
+algorithm.
+At the end of the execution of the AC-3, algorithm, your code should report whether the
+equivalent arc-consistent CSP found, also happens to be solved or not.
+If the puzzle is solved, then report the solution.
+If the puzzle is not solved, implement an additional algorithm from the ones seen in class, to
+solve it entirely and report the solution.
