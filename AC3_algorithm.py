@@ -1,4 +1,5 @@
 from collections import deque
+from time import time
 from unittest import result
 
 rows = "ABCDEFGHI"
@@ -91,9 +92,24 @@ def backtrack(domains, neighbours):
     return None
 
 def main():
+    times = []
+
+    start_time = time()
     csp_solver('sudoku_1.txt')
+    end_time = time()
+    times.append(end_time - start_time)
+    start_time = time()
     csp_solver('sudoku_2.txt')
+    end_time = time()
+    times.append(end_time - start_time)
+
+    start_time = time()
     csp_solver('sudoku_3.txt')
+    end_time = time()
+    times.append(end_time - start_time)
+    print("Time taken for each Sudoku puzzle:")
+    for i, t in enumerate(times, 1):
+        print(f"Sudoku {i}: {t:.4f} seconds")
 
 def csp_solver(filename):
     neighbors = {} #neighbors dictionary
@@ -112,7 +128,7 @@ def csp_solver(filename):
 
     file = open(filename, 'r')
     print(f"\nSolving Sudoku Puzzle from file: {filename}\n")
-    
+
     for square in domains:
         char = file.read(1) #read 1 char from file at a time
         while char in '\n': #skip new lines and spaces
