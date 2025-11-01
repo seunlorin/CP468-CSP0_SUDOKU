@@ -91,7 +91,11 @@ def backtrack(domains, neighbours):
     return None
 
 def main():
+    csp_solver('sudoku_1.txt')
+    csp_solver('sudoku_2.txt')
+    csp_solver('sudoku_3.txt')
 
+def csp_solver(filename):
     neighbors = {} #neighbors dictionary
     squares = [r + c for r in rows for c in cols] #create list of squares (A1, A2, etc..)
 
@@ -106,8 +110,9 @@ def main():
         #all row, col, and block neighbors together in a set
         neighbors[s] = set(row_neighbors + col_neighbors + b_neighbors) #use set to remove duplicates that come from block_neighbors
 
-    file = open('sudoku_1.txt', 'r')
-
+    file = open(filename, 'r')
+    print(f"\nSolving Sudoku Puzzle from file: {filename}\n")
+    
     for square in domains:
         char = file.read(1) #read 1 char from file at a time
         while char in '\n': #skip new lines and spaces
