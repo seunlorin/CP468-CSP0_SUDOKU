@@ -92,24 +92,28 @@ def backtrack(domains, neighbours):
     return None
 
 def main():
-    times = []
+    start_time = time()
+    result1, length_queue = csp_solver('sudoku_1.txt')
+    end_time = time()
+    time1 = end_time - start_time
 
     start_time = time()
-    csp_solver('sudoku_1.txt')
+    result2, length_queue = csp_solver('sudoku_2.txt')
     end_time = time()
-    times.append(end_time - start_time)
+    time2 = end_time - start_time
+    
     start_time = time()
-    csp_solver('sudoku_2.txt')
+    result3, length_queue = csp_solver('sudoku_3.txt')
     end_time = time()
-    times.append(end_time - start_time)
+    time3 = end_time - start_time
 
-    start_time = time()
-    csp_solver('sudoku_3.txt')
-    end_time = time()
-    times.append(end_time - start_time)
-    print("Time taken for each Sudoku puzzle:")
-    for i, t in enumerate(times, 1):
-        print(f"Sudoku {i}: {t:.4f} seconds")
+    print("Results")
+    print(f"Time taken for Sudoku 1: {time1:.4f} seconds.")
+    print_sudoku(result1)
+    print(f"Time taken for Sudoku 2: {time2:.4f} seconds.")
+    print_sudoku(result2)
+    print(f"Time taken for Sudoku 3: {time3:.4f} seconds.")
+    print_sudoku(result3)
 
 def csp_solver(filename):
     neighbors = {} #neighbors dictionary
@@ -145,15 +149,18 @@ def csp_solver(filename):
     domains, length_queue = AC3(domains, neighbors)
     if is_complete(domains):
         print("\nThe puzzle is solved by AC-3...")
-        print_sudoku(domains)
+        #print_sudoku(domains)
     else:
-        print("\nAC-3 could not solve the puzzle, proceeding to backtracking...")
+        #print("\nAC-3 could not solve the puzzle, proceeding to backtracking...")
         result = backtrack(domains, neighbors)
         if result:
-            print("\nThe puzzle is solved by Backtracking...")
-            print_sudoku(result)
+            #print("\nThe puzzle is solved by Backtracking...")
+            #print_sudoku(result)
+            return result, length_queue
         else:
             print("No solution found.")
+
+    return domains, length_queue
 
 def print_sudoku(domains):
     for r in rows:
