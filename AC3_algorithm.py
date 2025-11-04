@@ -10,7 +10,7 @@ def block_neighbors(square):
     row_index = rows.index(r) #convert row and col to 0 to 8 indexes
     col_index = int(c) - 1
 
-    block_row = (row_index // 3) * 3 #converts it to either 0, 1, 2 so we know which block in the row it belongs to
+    block_row = (row_index // 3) * 3 #converts it to either 0, 3, 6 so we know the starting index of the row and col of which block it belongs to
     block_col = (col_index // 3) * 3
 
     block_squares = [
